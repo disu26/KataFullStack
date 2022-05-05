@@ -1,6 +1,7 @@
 package co.com.sofka.back_kata_final.controller;
 
 import co.com.sofka.back_kata_final.domain.Todo;
+import co.com.sofka.back_kata_final.dto.TodoDto;
 import co.com.sofka.back_kata_final.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,12 +26,12 @@ public final class TodoController {
     }
 
     @PostMapping(value = "api/todo")
-    public Todo save(@RequestBody Todo todo){
+    public TodoDto save(@RequestBody TodoDto todo){
         return service.save(todo);
     }
 
     @PutMapping(value = "api/todo")
-    public Todo update(@RequestBody Todo todo){
+    public TodoDto update(@RequestBody TodoDto todo){
         if(todo.getId() != null){
             return service.save(todo);
         }
