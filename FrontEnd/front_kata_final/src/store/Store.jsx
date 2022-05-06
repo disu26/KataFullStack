@@ -2,6 +2,7 @@ import React, { createContext, useReducer} from 'react'
 import reducer from '../reducer/Reduce';
 
 export const initialState = {
+    todoList: { list: [], item: {} },
     todo: { list: [], item: {} }
 };
 

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Store } from '../store/Store';
 import { HOST_API } from '../App';
 
-const List = () => {
+const List = (listId) => {
     const { dispatch, state: { todo } } = useContext(Store);
     const currentList = todo.list;
   
@@ -49,7 +49,7 @@ const List = () => {
     const decorationDone = {
       textDecoration: 'line-through'
     };
-    return <div className='container mt-5'>
+    return <div className='container mt-5' id={listId.listId}>
       <table className='table'>
         <thead>
           <tr>

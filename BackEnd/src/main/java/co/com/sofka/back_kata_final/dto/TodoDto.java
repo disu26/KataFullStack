@@ -1,6 +1,5 @@
 package co.com.sofka.back_kata_final.dto;
 
-import co.com.sofka.back_kata_final.domain.TodoList;
 
 public final class TodoDto {
     private Long id;
