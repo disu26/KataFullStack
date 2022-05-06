@@ -1,5 +1,7 @@
 package co.com.sofka.back_kata_final.dto;
 
+import co.com.sofka.back_kata_final.domain.TodoList;
+
 public final class TodoDto {
     private Long id;
 
@@ -7,7 +9,7 @@ public final class TodoDto {
 
     private boolean completed;
 
-    private String groupListId;
+    private Long groupListId;
 
     public Long getId() {
         return id;
@@ -33,11 +35,11 @@ public final class TodoDto {
         this.completed = completed;
     }
 
-    public String getGroupListId() {
+    public Long getGroupListId() {
         return groupListId;
     }
 
-    public void setGroupListId(String groupListId) {
+    public void setGroupListId(Long groupListId) {
         this.groupListId = groupListId;
     }
 }

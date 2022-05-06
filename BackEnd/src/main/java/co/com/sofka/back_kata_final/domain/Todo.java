@@ -2,12 +2,7 @@ package co.com.sofka.back_kata_final.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -22,5 +17,7 @@ public final class Todo {
 
     private boolean completed;
 
-    private String groupListId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "list_id")
+    private TodoList groupList;
 }
