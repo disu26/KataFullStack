@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Store } from '../store/Store';
 import { HOST_API } from '../App';
 
-const List = (listId) => {
+const List = (list) => {
     const { dispatch, state: { todo } } = useContext(Store);
     const currentList = todo.list;
   
@@ -49,7 +49,7 @@ const List = (listId) => {
     const decorationDone = {
       textDecoration: 'line-through'
     };
-    return <div className='container mt-5' id={listId.listId}>
+    return <div className='container mt-5'>
       <table className='table'>
         <thead>
           <tr>
@@ -60,7 +60,7 @@ const List = (listId) => {
         </thead>
         <tbody>
           {currentList.map((todo) => {
-            return <tr key={todo.id} style={todo.completed ? decorationDone : {}}>
+            return <tr key={list.id} style={todo.completed ? decorationDone : {}}>
               <td>{todo.id}</td>
               <td>{todo.name}</td>
               <td><input type="checkbox" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input></td>

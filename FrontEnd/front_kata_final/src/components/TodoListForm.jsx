@@ -22,7 +22,7 @@ const TodoListForm = () => {
 
     useEffect(() => {
         showTodoList();
-    }, [dispatch]);
+    },[dispatch]);
 
     const onAdd = (event) => {
         event.preventDefault();
@@ -31,8 +31,6 @@ const TodoListForm = () => {
             name: state.name,
             id: null
         };
-
-        console.log(request)
     
         fetch(HOST_API + "/todoList", {
             method: "POST",
@@ -45,10 +43,15 @@ const TodoListForm = () => {
         .then((todoList) => {
             dispatch({ type: "add-todoList",  todoList});
             setState({ name: "" });
-            console.log(listTodoList)
+            showTodoList();
             formRef.current.reset();
         });
         
+    }
+
+    if(!listTodoList){
+        return <Fragment>
+        </Fragment>
     }
 
   return (

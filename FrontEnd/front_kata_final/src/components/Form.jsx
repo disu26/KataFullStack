@@ -2,7 +2,7 @@ import React, {useRef, useContext, useState} from 'react'
 import { HOST_API } from '../App';
 import { Store } from '../store/Store';
 
-const Form = (listId) => {
+const Form = (list) => {
     const formRef = useRef(null);
 
     const { dispatch, state: { todo } } = useContext(Store);
@@ -21,7 +21,7 @@ const Form = (listId) => {
           name: state.name,
           id: null,
           completed: false,
-          groupList: listId.listId
+          groupList: list.list.id
         };
   
         fetch(HOST_API + "/todo", {
@@ -74,7 +74,7 @@ const Form = (listId) => {
   
     return (
         <div className='container mt-5'>
-              <form ref={formRef} id={listId.listId}>
+              <form ref={formRef} id={list.list.id}>
                 <div className='form-group'>
                     <input
                         className='form-control'

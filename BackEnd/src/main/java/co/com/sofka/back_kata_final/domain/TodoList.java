@@ -1,5 +1,6 @@
 package co.com.sofka.back_kata_final.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -30,5 +31,6 @@ public final class TodoList {
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
+    @JsonManagedReference
     private Set<Todo> todos;
 }

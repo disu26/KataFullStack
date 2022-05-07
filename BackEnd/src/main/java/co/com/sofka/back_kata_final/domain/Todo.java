@@ -1,5 +1,6 @@
 package co.com.sofka.back_kata_final.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ public final class Todo {
 
     private boolean completed;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "list_id")
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = TodoList.class, optional = false)
+    @JoinColumn(name = "list_id", nullable = false)
+    @JsonBackReference
     private TodoList groupList;
 }

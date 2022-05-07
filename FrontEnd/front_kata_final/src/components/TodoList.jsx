@@ -23,8 +23,8 @@ const TodoList = () => {
           return <div className='container mt-5 border border secondary' id={todoList.id}>
             <h3>{todoList.name}</h3>
             <button className='btn btn-danger' onClick={() => onDelete(todoList.id)}> Eliminar Lista </button>
-            <Form listId = {todoList.id}/>
-            <List listId = {todoList.id}/>
+            <Form list = {todoList}/>
+            <List list = {todoList}/>
           </div>
         })
         }
