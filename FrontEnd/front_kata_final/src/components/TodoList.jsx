@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { Fragment, useContext } from 'react'
 import Form from './Form'
 import List from './List'
 import { Store } from '../store/Store'
@@ -21,16 +21,16 @@ const TodoList = ({ listTodoList }) => {
 
   const todoListItems = listOfTodos.map((item) => {
     const filterList = currentList.filter((todoItem) => todoItem.groupListId  === item.id);
-    return { ...currentList, filterList };
+    return { ...item, filterList };
   });
 
   return (
       <div className='container mt-5 border border-secondary'>
-        {todoListItems.map((todoList) => {
-          return <div className='container mt-5 border border secondary' id={todoList.id}>
-            <h3>{listTodoList.list.name}</h3>
+        {todoListItems.map((todoList, index) => {
+          return <div className='container mt-5 border border secondary' key={index}>
+            <h3>{todoList.name}</h3>
             <button className='btn btn-danger' onClick={() => onDelete(todoList.id)}> Eliminar Lista </button>
-            <Form list = {listTodoList}/>
+            <Form list = {todoList}/>
             <List todos = {todoList.filterList}/>
           </div>
           })

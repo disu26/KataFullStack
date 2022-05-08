@@ -3,7 +3,6 @@ import { HOST_API } from '../App';
 import { Store } from '../store/Store';
 
 const Form = (list) => {
-  console.log(list)
     const formRef = useRef(null);
 
     const { dispatch, state: { todo, todoList } } = useContext(Store);
@@ -21,7 +20,7 @@ const Form = (list) => {
         const request = {
           name: state.name,
           completed: false,
-          groupListId: list.id
+          groupListId: list.list.id
         };
   
         fetch(HOST_API + "/todo", {
@@ -50,7 +49,7 @@ const Form = (list) => {
           name: state.name,
           id: item.id,
           isCompleted: item.isCompleted,
-          groupListId: item.groupList
+          groupListId: item.groupListId
         };
     
         fetch(HOST_API + "/todo", {

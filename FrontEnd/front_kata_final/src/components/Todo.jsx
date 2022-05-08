@@ -7,8 +7,13 @@ const Todo = ({item}) => {
 
     const onDelete = (id) => {
         fetch(HOST_API + "/" + id + "/todo", {
-          method: "DELETE"
-        }).then((list) => {
+          method: "DELETE",
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'same-origin'
+        }).then(() => {
           dispatch({ type: "delete-item", id })
         })
       };
