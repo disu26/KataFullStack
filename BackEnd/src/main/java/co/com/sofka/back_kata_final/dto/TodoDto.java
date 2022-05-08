@@ -12,7 +12,7 @@ import java.io.Serializable;
 public final class TodoDto implements Serializable {
     private Long id;
     private String name;
-    private boolean completed;
+    private Boolean completed;
     private Long groupListId;
     private String groupListName;
 }

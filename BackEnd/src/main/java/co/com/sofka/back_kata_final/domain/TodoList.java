@@ -1,36 +1,34 @@
 package co.com.sofka.back_kata_final.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
+import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "todos_list_kata")
+@Table(name = "todos_list")
 public final class TodoList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
 
     private String name;
 
     @OneToMany(
             mappedBy = "groupList",
+            targetEntity = Todo.class,
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
             fetch = FetchType.EAGER
     )
     @JsonManagedReference
     private Set<Todo> todos;
+
 }

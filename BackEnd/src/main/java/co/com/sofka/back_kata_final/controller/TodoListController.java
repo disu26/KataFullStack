@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public final class TodoListController {
@@ -20,7 +22,8 @@ public final class TodoListController {
     private TodoListService service;
 
     @GetMapping(value = "api/todoList")
-    public Iterable<TodoList> list(){
+    public List<TodoList> list(){
+        var list = service.list();
         return service.list();
     }
 

@@ -7,6 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class TodoService {
@@ -17,10 +20,12 @@ public class TodoService {
     @Autowired
     ModelMapper mapper;
 
-    public Iterable<Todo> list(){
-        return repository.findAll();
+    @Transactional(readOnly = true)
+    public List<TodoDto> list(){
+        return repository.findAll().stream().map(this::mapTodoDto).toList();
     }
 
+    @Transactional
     public TodoDto save(TodoDto todo){
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         Todo newTodo = mapper.map(todo, Todo.class);
@@ -28,11 +33,20 @@ public class TodoService {
         return mapper.map(returnTodo, TodoDto.class);
     }
 
+    @Transactional
     public void delete(Long id){
         repository.delete(get(id));
     }
 
+    @Transactional(readOnly = true)
     public Todo get(Long id){
         return repository.findById(id).orElseThrow();
+    }
+
+    private TodoDto mapTodoDto(Todo todo){
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        TodoDto todoDto;
+        todoDto = mapper.map(todo, TodoDto.class);
+        return todoDto;
     }
 }

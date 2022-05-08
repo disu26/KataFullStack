@@ -3,34 +3,36 @@ package co.com.sofka.back_kata_final.controller;
 import co.com.sofka.back_kata_final.domain.Todo;
 import co.com.sofka.back_kata_final.dto.TodoDto;
 import co.com.sofka.back_kata_final.service.TodoService;
+import co.com.sofka.back_kata_final.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping(value = "api/todo")
 public final class TodoController {
 
     @Autowired
     private TodoService service;
 
-    @GetMapping(value = "api/todos")
-    public Iterable<Todo> list(){
+    private Response response;
+
+    private HttpStatus httpStatus = HttpStatus.OK;
+
+    @GetMapping()
+    public List<TodoDto> list(){
         return service.list();
     }
 
-    @PostMapping(value = "api/todo")
+    @PostMapping()
     public TodoDto save(@RequestBody TodoDto todo){
         return service.save(todo);
     }
 
-    @PutMapping(value = "api/todo")
+    @PutMapping()
     public TodoDto update(@RequestBody TodoDto todo){
         if(todo.getId() != null){
             return service.save(todo);

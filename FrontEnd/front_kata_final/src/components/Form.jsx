@@ -3,9 +3,10 @@ import { HOST_API } from '../App';
 import { Store } from '../store/Store';
 
 const Form = (list) => {
+  console.log(list)
     const formRef = useRef(null);
 
-    const { dispatch, state: { todo } } = useContext(Store);
+    const { dispatch, state: { todo, todoList } } = useContext(Store);
 
     const item = todo.item;
 
@@ -19,9 +20,8 @@ const Form = (list) => {
       if(state.name !== undefined && state.name.length > 0 ){
         const request = {
           name: state.name,
-          id: null,
           completed: false,
-          groupList: list.list.id
+          groupListId: list.id
         };
   
         fetch(HOST_API + "/todo", {
@@ -50,7 +50,7 @@ const Form = (list) => {
           name: state.name,
           id: item.id,
           isCompleted: item.isCompleted,
-          groupList: item.groupList
+          groupListId: item.groupList
         };
     
         fetch(HOST_API + "/todo", {
@@ -71,32 +71,32 @@ const Form = (list) => {
       seterrorMessage(true);
       formRef.current.reset();
     }
+    
   
     return (
         <div className='container mt-5'>
-              <form ref={formRef} id={list.list.id}>
-                <div className='form-group'>
-                    <input
-                        className='form-control'
-                        type="text"
-                        name="name"
-                        placeholder="¿Qué piensas hacer hoy?"
-                        defaultValue={item.name}
-                        onChange={(event) => {
-                          seterrorMessage(false);
-                          setState({ ...state, name: event.target.value })
-                        }
-                    } />
-                    <span className="text-danger text-small d-block mb-2">
-                      {errorMessage ? 'No se puede crear un TO DO vacío' : '' }
-                    </span>
-                    <div className='mt-2'>
-                        {item.id && <button className='btn btn-primary' onClick={onEdit}>Actualizar</button>}
-                        {!item.id && <button className='btn btn-primary' onClick={onAdd}>Crear</button>}
-                    </div>
+          <form ref={formRef}>
+            <div className='form-group'>
+                <input
+                    className='form-control'
+                    type="text"
+                    name="name"
+                    placeholder="¿Qué piensas hacer hoy?"
+                    defaultValue={item.name}
+                    onChange={(event) => {
+                      seterrorMessage(false);
+                      setState({ ...state, name: event.target.value })
+                    }
+                } />
+                <span className="text-danger text-small d-block mb-2">
+                  {errorMessage ? 'No se puede crear un TO DO vacío' : '' }
+                </span>
+                <div className='mt-2'>
+                    {item.id && <button className='btn btn-primary' onClick={onEdit}>Actualizar</button>}
+                    {!item.id && <button className='btn btn-primary' onClick={onAdd}>Crear</button>}
                 </div>
-            </form>
-            
+            </div>
+          </form>
         </div>
     )
 }

@@ -17,8 +17,8 @@ const TodoListForm = () => {
         const response = await fetch(HOST_API + "/todoList")
         const todosList = await response.json();
         await dispatch({ type: "update-todoList", list: todosList })
-        setState(todosList);
-    }
+        setState([todosList]);
+    }   
 
     useEffect(() => {
         showTodoList();
@@ -28,8 +28,7 @@ const TodoListForm = () => {
         event.preventDefault();
 
         const request = {
-            name: state.name,
-            id: null
+            name: state.name
         };
     
         fetch(HOST_API + "/todoList", {
@@ -71,7 +70,7 @@ const TodoListForm = () => {
                 <button className='btn btn-primary mt-2' onClick={onAdd}>Nueva Lista</button>
             </form>
         </div>
-        { listTodoList.length > 0 ? <TodoList /> : <EmptyList /> }
+        { listTodoList.length > 0 ? <TodoList listTodoList = {listTodoList}/> : <EmptyList /> }
     </Fragment>
   )
 }

@@ -22,7 +22,7 @@ function reducer(state, action) {
       case 'delete-list':
         const todoListUpDelete = state.todoList;
         const todoListUpdate = todoListUpDelete.list.filter((item) => {
-          return item.id !== action.id;
+          return item.id !== action.id; 
         });
         todoListUpDelete.list = todoListUpdate;
         return { ...state, todoList: todoListUpDelete }
