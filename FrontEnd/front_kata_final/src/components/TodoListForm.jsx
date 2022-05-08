@@ -13,6 +13,8 @@ const TodoListForm = () => {
 
     const [state, setState] = useState(listTodoList);
 
+    const [errorMessage, seterrorMessage] = useState(false);
+
     const showTodoList = async() => {
         const response = await fetch(HOST_API + "/todoList")
         const todosList = await response.json();
@@ -27,25 +29,28 @@ const TodoListForm = () => {
     const onAdd = (event) => {
         event.preventDefault();
 
-        const request = {
-            name: state.name
-        };
-    
-        fetch(HOST_API + "/todoList", {
-            method: "POST",
-            body: JSON.stringify(request),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then((todoList) => {
-            dispatch({ type: "add-todoList",  todoList});
-            setState({ name: "" });
-            showTodoList();
-            formRef.current.reset();
-        });
+        if(state.name !== undefined && state.name.length > 0 ){
+            const request = {
+                name: state.name
+            };
         
+            fetch(HOST_API + "/todoList", {
+                method: "POST",
+                body: JSON.stringify(request),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then((todoList) => {
+                dispatch({ type: "add-todoList",  todoList});
+                setState({ name: "" });
+                showTodoList();
+                formRef.current.reset();
+            });
+            return;
+        }
+        seterrorMessage(true)
     }
 
     if(!listTodoList){
@@ -63,10 +68,14 @@ const TodoListForm = () => {
                     name="name"
                     placeholder="Lista de TO-DO"
                     onChange={(event) => {
+                        seterrorMessage(false)
                         setState({ ...state, name: event.target.value })
                       }
                     } 
                 />
+                <span className="text-danger text-small d-block mb-2">
+                  {errorMessage ? 'No se puede crear un TO DO LIST vacío' : '' }
+                </span>
                 <button className='btn btn-primary mt-2' onClick={onAdd}>Nueva Lista</button>
             </form>
         </div>
