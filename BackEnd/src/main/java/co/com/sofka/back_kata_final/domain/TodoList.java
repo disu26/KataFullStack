@@ -2,10 +2,8 @@ package co.com.sofka.back_kata_final.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -25,7 +23,7 @@ public final class TodoList {
     @OneToMany(
             mappedBy = "groupList",
             targetEntity = Todo.class,
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.REMOVE,
             fetch = FetchType.EAGER
     )
     @JsonManagedReference

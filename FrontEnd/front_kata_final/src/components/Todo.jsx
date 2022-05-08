@@ -26,7 +26,8 @@ const Todo = ({item}) => {
         const request = {
           name: todo.name,
           id: todo.id,
-          completed: event.target.checked
+          completed: event.target.checked,
+          groupListId: todo.groupListId
         };
         fetch(HOST_API + "/todo", {
           method: "PUT",
@@ -53,9 +54,9 @@ const Todo = ({item}) => {
             <tr key={item.id} style={item.completed ? decorationDone : {}}>
             <td>{item.id}</td>
             <td>{item.name}</td>
-            <td><input type="checkbox" defaultChecked={item.completed} onChange={(event) => onChange(event, todo)}></input></td>
+            <td><input type="checkbox" defaultChecked={item.completed} onChange={(event) => onChange(event, item)}></input></td>
             <td><button className='btn btn-danger' onClick={() => {onDelete(item.id)}}>Eliminar</button></td>
-            <td><button className='btn btn-success' onClick={() => {onEdit(item)}}>Editar</button></td>
+            <td>{!item.completed && <button className='btn btn-success' onClick={() => {onEdit(item)}}>Editar</button>}</td>
             </tr>
       </Fragment>
   )

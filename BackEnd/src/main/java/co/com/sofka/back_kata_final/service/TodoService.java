@@ -34,8 +34,13 @@ public class TodoService {
     }
 
     @Transactional
-    public void delete(Long id){
-        repository.delete(get(id));
+    public Boolean delete(Long id){
+        var todo = repository.findById(id);
+        if(todo.isPresent()){
+            repository.delete(todo.get());
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
     @Transactional(readOnly = true)
