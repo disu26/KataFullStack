@@ -1,6 +1,9 @@
 import React, { createContext, useReducer} from 'react'
 import reducer from '../reducer/Reduce';
 
+/**
+ * Store para la aplicación.
+ */
 export const initialState = {
     todoList: { list: [], item: {} },
     todo: { list: [], item: {} }
