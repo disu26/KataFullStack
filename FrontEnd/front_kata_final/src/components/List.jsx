@@ -3,6 +3,11 @@ import { Store } from '../store/Store';
 import { HOST_API } from '../App';
 import Todo from './Todo';
 
+/**
+ * Lista que contiene todos los todos.
+ * @param {*} param0 
+ * @returns 
+ */
 const List = ({ todos }) => {
 
     const { dispatch } = useContext(Store);

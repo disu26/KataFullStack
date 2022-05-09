@@ -1,9 +1,14 @@
-import React, { Fragment, useContext } from 'react'
+import React, { useContext } from 'react'
 import Form from './Form'
 import List from './List'
 import { Store } from '../store/Store'
 import { HOST_API } from '../App'
 
+/**
+ * Componente que organiza la estructura principal de los todoList.
+ * 
+ * @returns 
+ */
 const TodoList = () => {
   const { dispatch, state: { todo,  todoList } } = useContext(Store);
 
@@ -11,6 +16,11 @@ const TodoList = () => {
 
   const listOfTodos = todoList.list;
 
+  /**
+   * Evento que se ejecuta al presionar el botón de eliminar.
+   * 
+   * @param {*} id 
+   */
   const onDelete = (id) => {
     fetch(HOST_API + "/" + id + "/todoList", {
       method: "DELETE"

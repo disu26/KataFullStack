@@ -2,8 +2,14 @@ import React, { Fragment, useContext } from 'react'
 import { HOST_API } from '../App';
 import { Store } from '../store/Store';
 
+/**
+ * Componente que muestra cada todo.
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 const Todo = ({item}) => {
-    const { dispatch, state: { todo } } = useContext(Store);
+    const { dispatch } = useContext(Store);
 
     const onDelete = (id) => {
         fetch(HOST_API + "/" + id + "/todo", {

@@ -4,6 +4,9 @@ import { HOST_API } from '../App'
 import { Store } from '../store/Store';
 import EmptyList from './EmptyList';
 
+/**
+ * Componente con el formulario para añadir nuevos todos.
+ */
 const TodoListForm = () => {
     const formRef = useRef(null);
 

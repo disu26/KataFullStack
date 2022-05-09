@@ -1,4 +1,10 @@
-
+/**
+ * Reducer que ejecuta diferentes acciones.
+ * 
+ * @param {*} state 
+ * @param {*} action 
+ * @returns 
+ */
 function reducer(state, action) {
     switch (action.type) {
       case 'update-item':

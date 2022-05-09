@@ -2,17 +2,29 @@ import React, {useRef, useContext, useState} from 'react'
 import { HOST_API } from '../App';
 import { Store } from '../store/Store';
 
+/**
+ * Componente formulario, para ingresar un todo.
+ * 
+ * @param {*} list 
+ * @returns 
+ */
 const Form = (list) => {
     const formRef = useRef(null);
 
-    const { dispatch, state: { todo, todoList } } = useContext(Store);
+    const { dispatch, state: { todo } } = useContext(Store);
 
     const item = todo.item;
 
     const [state, setState] = useState(item);
 
     const [errorMessage, seterrorMessage] = useState(false);
-  
+
+    /**
+     * Evento que se ejecuta al presionar el botón de añadir.
+     * 
+     * @param {*} event 
+     * @returns 
+     */
     const onAdd = (event) => {
       event.preventDefault();
 
@@ -41,6 +53,11 @@ const Form = (list) => {
       seterrorMessage(true)
     }
   
+    /**
+     * Evento que se ejecuta al presionar el botón de editar.
+     * @param {*} event 
+     * @returns 
+     */
     const onEdit = (event) => {
       event.preventDefault();
   
