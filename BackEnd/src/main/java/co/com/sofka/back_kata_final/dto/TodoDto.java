@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * Objeto DTO de la clase Todo.
+ *
+ * @author Dímar Andrey Suárez Hidalgo <dimar260212@gmail.com>
+ * @since 1.0.0
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

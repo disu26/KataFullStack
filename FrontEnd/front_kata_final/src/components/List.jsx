@@ -15,6 +15,7 @@ const List = ({ todos }) => {
         })
     }, [dispatch]);
 
+
     return <div className='container mt-5'>
       <table className='table'>
         <thead>

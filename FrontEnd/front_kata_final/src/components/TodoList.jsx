@@ -4,7 +4,7 @@ import List from './List'
 import { Store } from '../store/Store'
 import { HOST_API } from '../App'
 
-const TodoList = ({ listTodoList }) => {
+const TodoList = () => {
   const { dispatch, state: { todo,  todoList } } = useContext(Store);
 
   const currentList = todo.list;
